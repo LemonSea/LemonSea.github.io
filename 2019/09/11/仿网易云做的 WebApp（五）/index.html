@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="React,CloudMusic WebApp,rem,前端,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LemonSea" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：https://sanyuan0704.github.io/react-cloud-music/） 主要技术栈：react hooks + redux + immutable.js + rem 这一章主要讲 Recommend 的  scroll 组件的开发。">
+<meta name="keywords" content="React,CloudMusic WebApp,rem,前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="仿网易云做的 WebApp（五）">
+<meta property="og:url" content="http://yoursite.com/2019/09/11/仿网易云做的 WebApp（五）/index.html">
+<meta property="og:site_name" content="LemonSea">
+<meta property="og:description" content="跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：https://sanyuan0704.github.io/react-cloud-music/） 主要技术栈：react hooks + redux + immutable.js + rem 这一章主要讲 Recommend 的  scroll 组件的开发。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-11T08:13:02.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="仿网易云做的 WebApp（五）">
+<meta name="twitter:description" content="跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：https://sanyuan0704.github.io/react-cloud-music/） 主要技术栈：react hooks + redux + immutable.js + rem 这一章主要讲 Recommend 的  scroll 组件的开发。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '徐小平'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/11/仿网易云做的 WebApp（五）/">
+
+
+
+
+
+  <title>仿网易云做的 WebApp（五） | LemonSea</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LemonSea</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/11/仿网易云做的 WebApp（五）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐小平">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LemonSea">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">仿网易云做的 WebApp（五）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-11T02:09:00+08:00">
+                2019-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span id="busuanzi_value_page_pv"></span>次阅读
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：<a href="https://sanyuan0704.github.io/react-cloud-music/）" target="_blank" rel="noopener">https://sanyuan0704.github.io/react-cloud-music/）</a></li>
+<li>主要技术栈：react hooks + redux + immutable.js + rem</li>
+<li>这一章主要讲 <code>Recommend</code> 的  <code>scroll</code> 组件的开发。</li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h2 id="打造-scroll-基础组件"><a href="#打造-scroll-基础组件" class="headerlink" title="打造 scroll 基础组件"></a>打造 scroll 基础组件</h2><h3 id="安装-better-scroll-插件"><a href="#安装-better-scroll-插件" class="headerlink" title="安装 better-scroll 插件"></a>安装 better-scroll 插件</h3><p>是时候来做滑动组件啦。我们用插件 <code>better-scroll</code> 来做。</p>
+<p>官网：<a href="https://ustbhuangyi.github.io/better-scroll/#/examples/index-view" target="_blank" rel="noopener">https://ustbhuangyi.github.io/better-scroll/#/examples/index-view</a></p>
+<p><code>better-scroll</code> 有两个版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install better-scroll -S <span class="comment"># install 1.x</span></span><br><span class="line">npm install better-scroll@next -S <span class="comment"># install 2.x，该版本带有所有插件的能力。</span></span><br></pre></td></tr></table></figure>
+
+<p>这里我们安装第二个版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install better-scroll@next --save</span><br></pre></td></tr></table></figure>
+
+<p><code>better-scroll</code> 中文文档：<a href="https://github.com/ustbhuangyi/better-scroll/blob/master/README_zh-CN.md" target="_blank" rel="noopener">https://github.com/ustbhuangyi/better-scroll/blob/master/README_zh-CN.md</a></p>
+<p>使用参考资料：<a href="https://zhuanlan.zhihu.com/p/27407024" target="_blank" rel="noopener">当 BetterScroll 遇见 Vue</a></p>
+<p>业务 <code>scroll</code> 是基础组件，所以我们去 <code>baseUI</code> 种新建一个 <code>scroll</code> 文件夹及其 <code>index.js</code> 文件。</p>
+<p>编写 <code>scroll</code> 插件：</p>
+<p><code>baseUI/scroll/index.js</code> 导入文件：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React,&#123; useEffect, useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> BScroll <span class="keyword">from</span> <span class="string">"better-scroll"</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>better-scroll</code> 的可配置参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Scroll.propTypes = &#123;</span><br><span class="line">  direction: PropTypes.oneOf([<span class="string">'vertical'</span>, <span class="string">'horizental'</span>]),<span class="comment">//滚动的方向</span></span><br><span class="line">  click: <span class="literal">true</span>,<span class="comment">//是否支持点击</span></span><br><span class="line">  refresh: PropTypes.bool,<span class="comment">//是否刷新</span></span><br><span class="line">  onScroll: PropTypes.func,<span class="comment">//滑动触发的回调函数</span></span><br><span class="line">  pullUp: PropTypes.func,<span class="comment">//上拉加载逻辑</span></span><br><span class="line">  pullDown: PropTypes.func,<span class="comment">//下拉加载逻辑</span></span><br><span class="line">  pullUpLoading: PropTypes.bool,<span class="comment">//是否显示上拉loading动画</span></span><br><span class="line">  pullDownLoading: PropTypes.bool,<span class="comment">//是否显示下拉loading动画</span></span><br><span class="line">  bounceTop: PropTypes.bool,<span class="comment">//是否支持向上吸顶</span></span><br><span class="line">  bounceBottom: PropTypes.bool<span class="comment">//是否支持向下吸底</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>好了，首先我们先来写整体组件的架构：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React,&#123; useEffect, useState, useEffect, useRef &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> BScroll <span class="keyword">from</span> <span class="string">"better-scroll"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Scroll = forwardRef(<span class="function">(<span class="params">props, ref</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;ScrollContainer ref=&#123;scrollContaninerRef&#125;&gt;</span><br><span class="line">        &#123;props.children&#125;</span><br><span class="line">      &lt;<span class="regexp">/ScrollContainer&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Scroll;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里我们要用 <code>react Hooks</code>，所以要引入 <code>useEffect</code> 和 <code>useState</code>。<code>ScrollContainer</code> 是样式组件，这里还没写，只是把结构放出来。</p>
+<h3 id="forwarRef"><a href="#forwarRef" class="headerlink" title="forwarRef"></a>forwarRef</h3><p><code>forwardRef</code> 即引用传递（Ref forwading）是一种通过父组件向子组件自动传递 <code>引用ref</code> 的技术。</p>
+<p>当父组件需要控制其子组件的 <code>DOM</code> 的时候，如果我们仅仅在父组件中，在子组件的引用上，增加属性 <code>ref</code>，那么这个 <code>ref</code> 仅仅指向的是子组件，而不能知道子组件中的 <code>DOM</code> 节点。</p>
+<p>而在 <code>React16</code> 中，我们可以通过 <code>Forwarding refs</code> 使得在父组件中可以得到子组件中的 <code>DOM</code> 节点。</p>
+<p> <code>Forwarding refs</code> 中提供了一个 <code>React.forwardRef</code> 来创建组件，在 <code>React.forwardRef</code> 的方法中传递了参数 <code>ref</code>，通过这个 <code>ref</code> 可以指向具体的某一个 <code>dom</code>节点。具体的指向流程为：</p>
+<p>父组件myRef——&gt;React.forwardRef中的实参——&gt;通过forwardRef方法创建的子组件中的ref——&gt;指向子组件中的某一个dom节点：</p>
+<p>子组件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Child=React.forwardRef(<span class="function">(<span class="params">props,ref</span>)=&gt;</span>(</span><br><span class="line">  &lt;input ref=&#123;ref&#125; /&gt;</span><br><span class="line">));</span><br></pre></td></tr></table></figure>
+
+<p>父组件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.myRef=React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidMount()&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.myRef.current);</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;Child ref=&#123;this.myRef&#125;/&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的方法，父组件可以得到子组件种的 <code>&lt;input /&gt;</code>，而如果不用这种方法，得到的会是 <code>child</code>。</p>
+<p>这种方法经常出现在高阶组件（HOC）中。</p>
+<h2 id="编写-scoll-核心逻辑代码"><a href="#编写-scoll-核心逻辑代码" class="headerlink" title="编写 scoll 核心逻辑代码"></a>编写 scoll 核心逻辑代码</h2><h3 id="使用-hooks"><a href="#使用-hooks" class="headerlink" title="使用 hooks"></a>使用 hooks</h3><p>首先写入 <code>hooks</code> 变量吧，在 <code>scoll</code> 组件内写入：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//better-scroll实例对象</span></span><br><span class="line"><span class="keyword">const</span> [bScroll, setBScroll] = useState();</span><br><span class="line"><span class="comment">//current指向初始化bs实例需要的DOM元素 </span></span><br><span class="line"><span class="keyword">const</span> scrollContaninerRef = useRef();</span><br></pre></td></tr></table></figure>
+
+<p>现在的组件是：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React,&#123; useEffect, useState, useEffect, useRef &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> BScroll <span class="keyword">from</span> <span class="string">"better-scroll"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Scroll = forwardRef(<span class="function">(<span class="params">props, ref</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// better-scroll实例对象</span></span><br><span class="line">    <span class="keyword">const</span> [bScroll, setBScroll] = useState();</span><br><span class="line">    <span class="comment">// current指向初始化bs实例需要的DOM元素 </span></span><br><span class="line">    <span class="keyword">const</span> scrollContaninerRef = useRef();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;ScrollContainer ref=&#123;scrollContaninerRef&#125;&gt;</span><br><span class="line">            &#123;props.children&#125;</span><br><span class="line">        &lt;<span class="regexp">/ScrollContainer&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Scroll;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里解释一下 <code>useRef</code> 好了，应该已经注意到 <code>const scrollContaninerRef = useRef()</code> 和 <code>ref={scrollContaninerRef}</code> 了。这里的 <code>useRef</code> 的作用是保存变量，它会保存 <code>ScrollContainer</code> 的 <code>ref</code> 到 <code>scrollContaninerRef</code> 中。</p>
+<p>然后处理一下这个组件获取到的参数，在 <code>scoll</code> 组件内写入:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; direction, click, refresh, pullUpLoading, pullDownLoading, bounceTop, bounceBottom &#125; = props;</span><br><span class="line"><span class="keyword">const</span> &#123; pullUp, pullDown, onScroll &#125; = props;</span><br></pre></td></tr></table></figure>
+
+<p>我们通过结构赋值的方式拿到这些参数，虽然上面已经写过了，不过我再把可配置参数拿来对照着看吧。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Scroll.propTypes = &#123;</span><br><span class="line">  direction: PropTypes.oneOf([<span class="string">'vertical'</span>, <span class="string">'horizental'</span>]),<span class="comment">//滚动的方向</span></span><br><span class="line">  click: <span class="literal">true</span>,<span class="comment">//是否支持点击</span></span><br><span class="line">  refresh: PropTypes.bool,<span class="comment">//是否刷新</span></span><br><span class="line">  onScroll: PropTypes.func,<span class="comment">//滑动触发的回调函数</span></span><br><span class="line">  pullUp: PropTypes.func,<span class="comment">//上拉加载逻辑</span></span><br><span class="line">  pullDown: PropTypes.func,<span class="comment">//下拉加载逻辑</span></span><br><span class="line">  pullUpLoading: PropTypes.bool,<span class="comment">//是否显示上拉loading动画</span></span><br><span class="line">  pullDownLoading: PropTypes.bool,<span class="comment">//是否显示下拉loading动画</span></span><br><span class="line">  bounceTop: PropTypes.bool,<span class="comment">//是否支持向上吸顶</span></span><br><span class="line">  bounceBottom: PropTypes.bool<span class="comment">//是否支持向下吸底</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-better-scroll"><a href="#创建-better-scroll" class="headerlink" title="创建 better-scroll"></a>创建 better-scroll</h3><p>接下来创建 <code>better-scroll</code>，在 <code>scoll</code> 组件内写入：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> scroll = <span class="keyword">new</span> BScroll(scrollContaninerRef.current, &#123;</span><br><span class="line">    scrollX: direction === <span class="string">"horizental"</span>,</span><br><span class="line">    scrollY: direction === <span class="string">"vertical"</span>,</span><br><span class="line">    probeType: <span class="number">3</span>,</span><br><span class="line">    click: click,</span><br><span class="line">    bounce:&#123;</span><br><span class="line">      top: bounceTop,</span><br><span class="line">      bottom: bounceBottom</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  setBScroll(scroll);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setBScroll(<span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+
+<p>定义的 BScroll 的更多内容请查阅文档：<a href="https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/options.html" target="_blank" rel="noopener">https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/options.html</a>，在选项基础中就可以看见属性的意义了。</p>
+<p>这里用了 <code>useEffect</code> 的方法，值得注意的是在它的内部函数中有一个 <code>return</code>，这里是我前面没有提及的。现在说明一下：</p>
+<p>而 <code>useEffect</code> 的第二个参数就是用来限制 useEffect 解绑的：</p>
+<p>当 <code>useEffect</code> 不传入第二个参数的时候，每次状态发生变化，都会解绑；</p>
+<p>当传空数组[]时，就是当组件将被销毁时才进行解绑；</p>
+<p>传入值的话，就是值变动时才会解绑。</p>
+<p>而挂载（mount）时，会执行一次非 <code>return</code> 的内容，而不执行 <code>return</code> 的函数，当 <code>change</code> 时，会执行第一次 <code>return</code> 的内容和第二次非 <code>return</code> 的内容。</p>
+<h3 id="重写渲染时刷新实例"><a href="#重写渲染时刷新实例" class="headerlink" title="重写渲染时刷新实例"></a>重写渲染时刷新实例</h3><p>每次重新渲染都要刷新实例，防止无法滑动:</p>
+<p>在 <code>scoll</code> 组件内写入：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(refresh &amp;&amp; bScroll)&#123;</span><br><span class="line">    bScroll.refresh();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里通过是否刷新 <code>refresh</code> 以及实例对象 <code>bScroll</code> 是否有内容来判断是否需要刷新。</p>
+<h3 id="给实例绑定-scroll-事件"><a href="#给实例绑定-scroll-事件" class="headerlink" title="给实例绑定 scroll 事件"></a>给实例绑定 scroll 事件</h3><p>在 <code>scoll</code> 组件内写入：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(!bScroll || !onScroll) <span class="keyword">return</span>;</span><br><span class="line">  bScroll.on(<span class="string">'scroll'</span>, (scroll) =&gt; &#123;</span><br><span class="line">    onScroll(scroll);</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    bScroll.off(<span class="string">'scroll'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, [onScroll, bScroll]);</span><br></pre></td></tr></table></figure>
+
+<p>当 <code>bScroll</code> 实例有值且同时存在滑动触发的回调函数 <code>onScroll</code> 时，执行 <code>onScroll</code>。</p>
+<p>这里解释一下 <code>scroll</code> 的 <code>on</code> 和 <code>off</code> 好了，虽然在其文档的 <code>方法/通用</code> 中也可查。</p>
+<p><strong>on(type, fn, context)</strong></p>
+<ul>
+<li>参数：<ul>
+<li>{String} type 事件名</li>
+<li>{Function} fn 回调函数</li>
+<li>{context} 函数执行的上下文环境，默认是 this</li>
+</ul>
+</li>
+<li>返回值：无</li>
+<li>作用：监听当前实例上的<a href="https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/events.html" target="_blank" rel="noopener">自定义事件</a>。如：scroll, scrollEnd, pullingUp, pullingDown等。</li>
+</ul>
+<p><strong>off(type, fn)</strong></p>
+<ul>
+<li>参数：<ul>
+<li>{String} type 事件名</li>
+<li>{Function} fn 回调函数</li>
+</ul>
+</li>
+<li>返回值：无</li>
+<li>作用：移除自定义事件监听器。只会移除这个回调的监听器。</li>
+</ul>
+<h3 id="进行上拉到底的判断，调用上拉刷新的函数"><a href="#进行上拉到底的判断，调用上拉刷新的函数" class="headerlink" title="进行上拉到底的判断，调用上拉刷新的函数"></a>进行上拉到底的判断，调用上拉刷新的函数</h3><p>在 <code>scoll</code> 组件内写入：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(!bScroll || !pullUp) <span class="keyword">return</span>;</span><br><span class="line">  bScroll.on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="comment">//判断是否滑动到了底部</span></span><br><span class="line">    <span class="keyword">if</span>(bScroll.y &lt;= bScroll.maxScrollY + <span class="number">100</span>)&#123;</span><br><span class="line">      pullUp();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    bScroll.off(<span class="string">'scrollEnd'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, [pullUp, bScroll]);</span><br></pre></td></tr></table></figure>
+
+<p>同样的：当 <code>bScroll</code> 实例有值且同时存在上拉加载逻辑 <code>pullUp</code> 时，判断是否滑到了底部，若是，则执行 <code>pullUp</code>。</p>
+<h3 id="进行下拉的判断，调用下拉刷新的函数"><a href="#进行下拉的判断，调用下拉刷新的函数" class="headerlink" title="进行下拉的判断，调用下拉刷新的函数"></a>进行下拉的判断，调用下拉刷新的函数</h3><p>类似的，在 <code>scoll</code> 组件内写入：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(!bScroll || !pullDown) <span class="keyword">return</span>;</span><br><span class="line">  bScroll.on(<span class="string">'touchEnd'</span>, (pos) =&gt; &#123;</span><br><span class="line">    <span class="comment">//判断用户的下拉动作</span></span><br><span class="line">    <span class="keyword">if</span>(pos.y &gt; <span class="number">50</span>) &#123;</span><br><span class="line">      pullDown();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    bScroll.off(<span class="string">'touchEnd'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, [pullDown, bScroll]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="给外界暴露组件方法"><a href="#给外界暴露组件方法" class="headerlink" title="给外界暴露组件方法"></a>给外界暴露组件方法</h3><p>假设上层组件中：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//上层组件代码</span></span><br><span class="line"><span class="keyword">const</span> scrollRef = useRef();</span><br><span class="line">...</span><br><span class="line">&lt;Scroll ref=&#123;scrollRef&#125;&gt;&lt;/Scroll&gt;</span><br></pre></td></tr></table></figure>
+
+<p>希望通过这种调用方法的方式刷新scroll组件：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrollRef.current.refresh();</span><br></pre></td></tr></table></figure>
+
+<p>我们使用的方案是 <code>React Hooks</code> 中的 <code>useImperativeHandle</code> 提供的解决方案：</p>
+<p>首先导入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; forwardRef, useState, useEffect, useRef, useImperativeHandle &#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>Scroll</code> 组件里面写：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般和forwardRef一起使用，ref已经在forWardRef中默认传入</span></span><br><span class="line">useImperativeHandle(ref, () =&gt; (&#123;</span><br><span class="line">  <span class="comment">//给外界暴露refresh方法</span></span><br><span class="line">  refresh() &#123;</span><br><span class="line">    <span class="keyword">if</span>(bScroll) &#123;</span><br><span class="line">      bScroll.refresh();</span><br><span class="line">      bScroll.scrollTo(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//给外界暴露getBScroll方法, 提供bs实例</span></span><br><span class="line">  getBScroll() &#123;</span><br><span class="line">    <span class="keyword">if</span>(bScroll) &#123;</span><br><span class="line">      <span class="keyword">return</span> bScroll;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+<h3 id="默认赋值"><a href="#默认赋值" class="headerlink" title="默认赋值"></a>默认赋值</h3><p>完了吗？不，我们还有一步，那就是在组件中默认赋值，这样我们这个组件才算完成：</p>
+<p>默认赋值，在 <code>scoll</code> 组件外写入：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Scroll.defaultProps = &#123;</span><br><span class="line">  direction: <span class="string">"vertical"</span>,</span><br><span class="line">  click: <span class="literal">true</span>,</span><br><span class="line">  refresh: <span class="literal">true</span>,</span><br><span class="line">  onScroll:<span class="literal">null</span>,</span><br><span class="line">  pullUpLoading: <span class="literal">false</span>,</span><br><span class="line">  pullDownLoading: <span class="literal">false</span>,</span><br><span class="line">  pullUp: <span class="literal">null</span>,</span><br><span class="line">  pullDown: <span class="literal">null</span>,</span><br><span class="line">  bounceTop: <span class="literal">true</span>,</span><br><span class="line">  bounceBottom: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这样就完成了默认赋值了。</p>
+<h3 id="类型检查"><a href="#类型检查" class="headerlink" title="类型检查"></a>类型检查</h3><p>上面已经把 <code>scoll</code> 组件写完了，但这个组件参数这么多，我们追求完美，不如给参数来个类型检查。</p>
+<p>首先导入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">"prop-types"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>类型检查，在 <code>scoll</code> 组件外写入：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Scroll.propTypes = &#123;</span><br><span class="line">  direction: PropTypes.oneOf([<span class="string">'vertical'</span>, <span class="string">'horizental'</span>]),</span><br><span class="line">  refresh: PropTypes.bool,</span><br><span class="line">  onScroll: PropTypes.func,</span><br><span class="line">  pullUp: PropTypes.func,</span><br><span class="line">  pullDown: PropTypes.func,</span><br><span class="line">  pullUpLoading: PropTypes.bool,</span><br><span class="line">  pullDownLoading: PropTypes.bool,</span><br><span class="line">  bounceTop: PropTypes.bool,<span class="comment">//是否支持向上吸顶</span></span><br><span class="line">  bounceBottom: PropTypes.bool<span class="comment">//是否支持向上吸顶</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="样式组件"><a href="#样式组件" class="headerlink" title="样式组件"></a>样式组件</h3><p>对了，我们这里使用了样式组件，代码如下，直接写在这个 <code>index.js</code> 中就行了：</p>
+<p>导入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'styled-components'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在组件 <code>scroll</code> 外面写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ScrollContainer = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  width: 100%;</span></span><br><span class="line"><span class="string">  height: 100%;</span></span><br><span class="line"><span class="string">  overflow: hidden;</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; forwardRef, useState, useEffect, useRef, useImperativeHandle &#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">"prop-types"</span>;</span><br><span class="line"><span class="keyword">import</span> BScroll <span class="keyword">from</span> <span class="string">"better-scroll"</span>;</span><br><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'styled-components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Scroll = forwardRef(<span class="function">(<span class="params">props, ref</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// better-scroll实例对象</span></span><br><span class="line">    <span class="keyword">const</span> [bScroll, setBScroll] = useState();</span><br><span class="line">    <span class="comment">// current指向初始化bs实例需要的DOM元素 </span></span><br><span class="line">    <span class="keyword">const</span> scrollContaninerRef = useRef();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 对象结构获取参数</span></span><br><span class="line">    <span class="keyword">const</span> &#123; direction, click, refresh, pullUpLoading, pullDownLoading, bounceTop, bounceBottom &#125; = props;</span><br><span class="line">    <span class="keyword">const</span> &#123; pullUp, pullDown, onScroll &#125; = props;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建 better-scroll</span></span><br><span class="line">    useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> scroll = <span class="keyword">new</span> BScroll(scrollContaninerRef.current, &#123;</span><br><span class="line">            scrollX: direction === <span class="string">"horizental"</span>,  <span class="comment">// 当设置为 true 的时候，可以开启横向滚动。当设置 eventPassthrough 为 'horizontal' 的时候，该配置无效。</span></span><br><span class="line">            scrollY: direction === <span class="string">"vertical"</span>,  <span class="comment">// 当设置为 true 的时候，可以开启纵向滚动。当设置 eventPassthrough 为 'vertical' 的时候，该配置无效。</span></span><br><span class="line">            <span class="comment">// 有时候我们需要知道滚动的位置。</span></span><br><span class="line">            <span class="comment">// 当 probeType 为 1 的时候，会非实时（屏幕滑动超过一定时间后）派发scroll 事件；</span></span><br><span class="line">            <span class="comment">// 当 probeType 为 2 的时候，会在屏幕滑动的过程中实时的派发 scroll 事件；</span></span><br><span class="line">            <span class="comment">// 当 probeType 为 3 的时候，不仅在屏幕滑动的过程中，而且在 momentum 滚动动画运行过程中实时派发 scroll 事件。</span></span><br><span class="line">            <span class="comment">// 如果没有设置该值，其默认值为 0，即不派发 scroll 事件。</span></span><br><span class="line">            probeType: <span class="number">3</span>,</span><br><span class="line">            <span class="comment">// better-scroll 默认会阻止浏览器的原生 click 事件。当设置为 true，better-scroll 会派发一个 click 事件，我们会给派发的 event 参数加一个私有属性 _constructed，值为 true。</span></span><br><span class="line">            click: click,</span><br><span class="line">            <span class="comment">// 当滚动超过边缘的时候会有一小段回弹动画。设置为 true 则开启动画。</span></span><br><span class="line">            <span class="comment">// 这里使用的 变量 来控制</span></span><br><span class="line">            bounce: &#123;</span><br><span class="line">                top: bounceTop,</span><br><span class="line">                bottom: bounceBottom</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        setBScroll(scroll);</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            setBScroll(<span class="literal">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, []);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 每次渲染都刷新实例，防止无法滑动</span></span><br><span class="line">    useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (refresh &amp;&amp; bScroll) &#123;</span><br><span class="line">            bScroll.refresh();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 给实例绑定scroll事件</span></span><br><span class="line">    useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!bScroll || !onScroll) <span class="keyword">return</span>;</span><br><span class="line">        bScroll.on(<span class="string">'scroll'</span>, (scroll) =&gt; &#123;</span><br><span class="line">            onScroll(scroll);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            bScroll.off(<span class="string">'scroll'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [onScroll, bScroll]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 进行上拉到底的判断，调用上拉刷新的函数</span></span><br><span class="line">    useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!bScroll || !pullUp) <span class="keyword">return</span>;</span><br><span class="line">        bScroll.on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</span><br><span class="line">            <span class="comment">//判断是否滑动到了底部</span></span><br><span class="line">            <span class="keyword">if</span> (bScroll.y &lt;= bScroll.maxScrollY + <span class="number">100</span>) &#123;</span><br><span class="line">                pullUp();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            bScroll.off(<span class="string">'scrollEnd'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [pullUp, bScroll]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 进行下拉到底的判断，调用下拉刷新的函数</span></span><br><span class="line">    useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!bScroll || !pullDown) <span class="keyword">return</span>;</span><br><span class="line">        bScroll.on(<span class="string">'touchEnd'</span>, (pos) =&gt; &#123;</span><br><span class="line">            <span class="comment">//判断用户的下拉动作</span></span><br><span class="line">            <span class="keyword">if</span> (pos.y &gt; <span class="number">50</span>) &#123;</span><br><span class="line">                pullDown();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            bScroll.off(<span class="string">'touchEnd'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [pullDown, bScroll]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一般和forwardRef一起使用，ref已经在forWardRef中默认传入</span></span><br><span class="line">    useImperativeHandle(ref, () =&gt; (&#123;</span><br><span class="line">        <span class="comment">//给外界暴露refresh方法</span></span><br><span class="line">        refresh() &#123;</span><br><span class="line">            <span class="keyword">if</span> (bScroll) &#123;</span><br><span class="line">                bScroll.refresh();</span><br><span class="line">                bScroll.scrollTo(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//给外界暴露getBScroll方法, 提供bs实例</span></span><br><span class="line">        getBScroll() &#123;</span><br><span class="line">            <span class="keyword">if</span> (bScroll) &#123;</span><br><span class="line">                <span class="keyword">return</span> bScroll;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;ScrollContainer ref=&#123;scrollContaninerRef&#125;&gt;</span><br><span class="line">            &#123;props.children&#125;</span><br><span class="line">        &lt;<span class="regexp">/ScrollContainer&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 默认赋值</span></span><br><span class="line"><span class="regexp">Scroll.defaultProps = &#123;</span></span><br><span class="line"><span class="regexp">    direction: "vertical",</span></span><br><span class="line"><span class="regexp">    click: true,</span></span><br><span class="line"><span class="regexp">    refresh: true,</span></span><br><span class="line"><span class="regexp">    onScroll: null,</span></span><br><span class="line"><span class="regexp">    pullUpLoading: false,</span></span><br><span class="line"><span class="regexp">    pullDownLoading: false,</span></span><br><span class="line"><span class="regexp">    pullUp: null,</span></span><br><span class="line"><span class="regexp">    pullDown: null,</span></span><br><span class="line"><span class="regexp">    bounceTop: true,</span></span><br><span class="line"><span class="regexp">    bounceBottom: true</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Scroll.propTypes = &#123;</span></span><br><span class="line"><span class="regexp">    direction: PropTypes.oneOf(['vertical', 'horizental']),</span></span><br><span class="line"><span class="regexp">    refresh: PropTypes.bool,</span></span><br><span class="line"><span class="regexp">    onScroll: PropTypes.func,</span></span><br><span class="line"><span class="regexp">    pullUp: PropTypes.func,</span></span><br><span class="line"><span class="regexp">    pullDown: PropTypes.func,</span></span><br><span class="line"><span class="regexp">    pullUpLoading: PropTypes.bool,</span></span><br><span class="line"><span class="regexp">    pullDownLoading: PropTypes.bool,</span></span><br><span class="line"><span class="regexp">    bounceTop: PropTypes.bool,/</span><span class="regexp">/是否支持向上吸顶</span></span><br><span class="line"><span class="regexp">    bounceBottom: PropTypes.bool/</span><span class="regexp">/是否支持向上吸顶</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Scroll;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="样式中使用"><a href="#样式中使用" class="headerlink" title="样式中使用"></a>样式中使用</h2><p>到 <code>Recommend</code> 目录下的 <code>index.js</code> 中，导入 <code>Scroll</code> 组件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Scroll <span class="keyword">from</span> <span class="string">'../../baseUI/scroll'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>函数返回的JSX代码变化如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Content&gt;</span><br><span class="line">  &lt;Scroll className=<span class="string">"list"</span>&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Slider bannerList=&#123;bannerList&#125;&gt;&lt;/Slider&gt;</span><br><span class="line">      &lt;List recommendList=&#123;recommendList&#125;&gt;&lt;/List&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>Scroll&gt;</span><br><span class="line">&lt;<span class="regexp">/Content&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的 Content 是样式组件，因为只有一个，所以直接在当前目录下写好了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'styled-components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> Content = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  position: fixed;</span></span><br><span class="line"><span class="string">  top: 2.4rem;</span></span><br><span class="line"><span class="string">  bottom: 0;</span></span><br><span class="line"><span class="string">  width: 100%;</span></span><br><span class="line"><span class="string">  max-width: 750px;</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+
+<p>这里解释一下，我们之前给了 <code>&lt;Scroll&gt;</code> 组件一个高度和宽度，都是相对于父容器 <code>Content</code> 的 <code>100%</code>。</p>
+<p>我们滑动时，滑动的不是 <code>&lt;Scroll&gt;</code> 这个组件，而是它里面的内容，即 <code>&lt;div&gt;</code>。</p>
+<p>然后看 <code>Recommend</code> 组件，这里我们写了个绝对定位的样式组件 <code>Content</code>，为什么呢？那是因为我们没有给我们的 <code>Header</code> 组件加绝对定位，如果不给 <code>Recommend</code> 加绝对定位的话，我们滑动时滑动的会是整个页面，但是给了 <code>Recommend</code> 一个绝对定位，它就脱离了文档流了，我们再给它一个宽和高，并设置 <code>top</code> 定好位置。这样由于 <code>Recommend</code> 脱离了文档流，有固定的宽高，所以我们才能看见滑动的功能。实际上设置 <code>header</code> 组件绝对定位也是可以的，这里就尝试一下这种方法吧。</p>
+<p>现在打开页面，你就能体会到下拉吸顶、上拉吸底的感觉了。不过还是有一个问题，当你下拉的时候，中间会有一段空白，感觉比较突兀，因为我们图片背后的红色是通过 <code>SliderContainer</code> 中 <code>.before</code> 设置的，所以解决这个问题也很简单。</p>
+<p>还是从遮罩入手吧，去 <code>SliderContainer</code> 中的 <code>.before</code>，它在轮播组件 <code>slider</code> 的 <code>style.js</code> 中，修改如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.before</span>&#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: -<span class="number">8rem</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">10.666667rem</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background</span>: $&#123;style[<span class="string">"theme-color"</span>]&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如此修改即可，我们通过扩大了 <code>.before</code> 的高度，来实现填充下拉间隙的目的。</p>
+<p>至此，我们的滑动组件就完成了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/CloudMusic-WebApp/" rel="tag"># CloudMusic WebApp</a>
+          
+            <a href="/tags/rem/" rel="tag"># rem</a>
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/10/仿网易云做的 WebApp（四）/" rel="next" title="仿网易云做的 WebApp（四）">
+                <i class="fa fa-chevron-left"></i> 仿网易云做的 WebApp（四）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/12/仿网易云做的 WebApp（六）/" rel="prev" title="仿网易云做的 WebApp（六）">
+                仿网易云做的 WebApp（六） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="your uid"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="徐小平">
+            
+              <p class="site-author-name" itemprop="name">徐小平</p>
+              <p class="site-description motion-element" itemprop="description">路漫漫其修远兮，吾将上下而求索</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LemonSea" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#打造-scroll-基础组件"><span class="nav-number">1.</span> <span class="nav-text">打造 scroll 基础组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-better-scroll-插件"><span class="nav-number">1.1.</span> <span class="nav-text">安装 better-scroll 插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#forwarRef"><span class="nav-number">1.2.</span> <span class="nav-text">forwarRef</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写-scoll-核心逻辑代码"><span class="nav-number">2.</span> <span class="nav-text">编写 scoll 核心逻辑代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-hooks"><span class="nav-number">2.1.</span> <span class="nav-text">使用 hooks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-better-scroll"><span class="nav-number">2.2.</span> <span class="nav-text">创建 better-scroll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重写渲染时刷新实例"><span class="nav-number">2.3.</span> <span class="nav-text">重写渲染时刷新实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给实例绑定-scroll-事件"><span class="nav-number">2.4.</span> <span class="nav-text">给实例绑定 scroll 事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进行上拉到底的判断，调用上拉刷新的函数"><span class="nav-number">2.5.</span> <span class="nav-text">进行上拉到底的判断，调用上拉刷新的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进行下拉的判断，调用下拉刷新的函数"><span class="nav-number">2.6.</span> <span class="nav-text">进行下拉的判断，调用下拉刷新的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给外界暴露组件方法"><span class="nav-number">2.7.</span> <span class="nav-text">给外界暴露组件方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认赋值"><span class="nav-number">2.8.</span> <span class="nav-text">默认赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型检查"><span class="nav-number">2.9.</span> <span class="nav-text">类型检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样式组件"><span class="nav-number">2.10.</span> <span class="nav-text">样式组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样式中使用"><span class="nav-number">4.</span> <span class="nav-text">样式中使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐小平</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

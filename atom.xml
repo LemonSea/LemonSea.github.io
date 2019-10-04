@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>LemonSea</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-10-04T16:07:25.339Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>徐小平</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React 构建组件的步骤与方法</title>
+    <link href="http://yoursite.com/2019/10/04/React%E7%9A%84state%E4%B8%8Eprops/"/>
+    <id>http://yoursite.com/2019/10/04/React的state与props/</id>
+    <published>2019-10-04T15:58:00.000Z</published>
+    <updated>2019-10-04T16:07:25.339Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;React 构建组件的步骤与方法&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React受控组件与非受控组件</title>
+    <link href="http://yoursite.com/2019/10/04/React%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6%E4%B8%8E%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6/"/>
+    <id>http://yoursite.com/2019/10/04/React受控组件与非受控组件/</id>
+    <published>2019-10-04T15:34:00.000Z</published>
+    <updated>2019-10-04T15:58:41.221Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;React受控组件与非受控组件&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正确使用React State</title>
+    <link href="http://yoursite.com/2019/10/04/%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8React%20State/"/>
+    <id>http://yoursite.com/2019/10/04/正确地使用React State/</id>
+    <published>2019-10-04T14:38:00.000Z</published>
+    <updated>2019-10-04T15:34:05.268Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;正确使用React State&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React生命周期</title>
+    <link href="http://yoursite.com/2019/10/04/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://yoursite.com/2019/10/04/React生命周期/</id>
+    <published>2019-10-04T13:14:00.000Z</published>
+    <updated>2019-10-04T14:46:31.435Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;React16 版本前与16版本后的生命周期。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>axios 基础.md</title>
+    <link href="http://yoursite.com/2019/10/04/axios%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/10/04/axios常用方法/</id>
+    <published>2019-10-03T16:12:31.000Z</published>
+    <updated>2019-10-04T09:46:42.316Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里主要介绍的是 axios 的基础&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="axios" scheme="http://yoursite.com/categories/axios/"/>
+    
+    
+      <category term="axios" scheme="http://yoursite.com/tags/axios/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React-Hooks基础用法</title>
+    <link href="http://yoursite.com/2019/10/02/React-Hooks%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/10/02/React-Hooks基础用法/</id>
+    <published>2019-10-02T06:31:00.000Z</published>
+    <updated>2019-10-04T14:46:41.177Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;React-Hooks 各类函数的用法。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="React-Hooks" scheme="http://yoursite.com/tags/React-Hooks/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>文章管理系统——前端（二）</title>
+    <link href="http://yoursite.com/2019/09/17/%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E5%89%8D%E7%AB%AF%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/17/文章管理系统——前端（二）/</id>
+    <published>2019-09-17T09:18:44.000Z</published>
+    <updated>2019-10-04T14:47:01.932Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;一个后台管理界面的前台&lt;/li&gt;
+&lt;li&gt;主要技术栈：react hooks + redux + immutable.js + antd&lt;/li&gt;
+&lt;li&gt;这一章主要讲 redux 结构与 login 的 UI&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="后台管理系统" scheme="http://yoursite.com/tags/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>文章管理系统——前端（一）</title>
+    <link href="http://yoursite.com/2019/09/17/%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E5%89%8D%E7%AB%AF%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/17/文章管理系统——前端（一）/</id>
+    <published>2019-09-17T09:18:44.000Z</published>
+    <updated>2019-10-04T14:47:12.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;一个后台管理界面的前台&lt;/li&gt;
+&lt;li&gt;主要技术栈：react hooks + redux + immutable.js + antd&lt;/li&gt;
+&lt;li&gt;这一章主要讲依赖安装与 antd 配置&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="后台管理系统" scheme="http://yoursite.com/tags/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>文章管理系统——后端（一）</title>
+    <link href="http://yoursite.com/2019/09/17/%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/17/文章管理系统——后端（一）/</id>
+    <published>2019-09-17T09:18:44.000Z</published>
+    <updated>2019-10-04T14:46:59.261Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;主要技术栈：.net Core&lt;/li&gt;
+&lt;li&gt;这一章主要讲 &lt;code&gt;.net Core&lt;/code&gt; 的结构。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term=".net" scheme="http://yoursite.com/categories/net/"/>
+    
+    
+      <category term="后台管理系统" scheme="http://yoursite.com/tags/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term=".net Core" scheme="http://yoursite.com/tags/net-Core/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>仿网易云做的 WebApp（七）</title>
+    <link href="http://yoursite.com/2019/09/13/%E4%BB%BF%E7%BD%91%E6%98%93%E4%BA%91%E5%81%9A%E7%9A%84%20WebApp%EF%BC%88%E4%B8%83%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/13/仿网易云做的 WebApp（七）/</id>
+    <published>2019-09-12T18:09:00.000Z</published>
+    <updated>2019-09-14T04:49:40.337Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：&lt;a href=&quot;https://sanyuan0704.github.io/react-cloud-music/）&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://sanyuan0704.github.io/react-cloud-music/）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;主要技术栈：react hooks + redux + immutable.js + rem&lt;/li&gt;
+&lt;li&gt;这一章主要讲 &lt;code&gt;Recommend&lt;/code&gt; 的性能优化：图片懒加载，与 &lt;code&gt;Loading&lt;/code&gt; 动画。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="CloudMusic WebApp" scheme="http://yoursite.com/tags/CloudMusic-WebApp/"/>
+    
+      <category term="rem" scheme="http://yoursite.com/tags/rem/"/>
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>仿网易云做的 WebApp（六）</title>
+    <link href="http://yoursite.com/2019/09/12/%E4%BB%BF%E7%BD%91%E6%98%93%E4%BA%91%E5%81%9A%E7%9A%84%20WebApp%EF%BC%88%E5%85%AD%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/12/仿网易云做的 WebApp（六）/</id>
+    <published>2019-09-11T18:09:00.000Z</published>
+    <updated>2019-09-13T17:29:16.267Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：&lt;a href=&quot;https://sanyuan0704.github.io/react-cloud-music/）&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://sanyuan0704.github.io/react-cloud-music/）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;主要技术栈：react hooks + redux + immutable.js + rem&lt;/li&gt;
+&lt;li&gt;这一章主要讲 &lt;code&gt;axios&lt;/code&gt; 与 &lt;code&gt;redux&lt;/code&gt; 的数据层开发。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="CloudMusic WebApp" scheme="http://yoursite.com/tags/CloudMusic-WebApp/"/>
+    
+      <category term="rem" scheme="http://yoursite.com/tags/rem/"/>
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>仿网易云做的 WebApp（五）</title>
+    <link href="http://yoursite.com/2019/09/11/%E4%BB%BF%E7%BD%91%E6%98%93%E4%BA%91%E5%81%9A%E7%9A%84%20WebApp%EF%BC%88%E4%BA%94%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/11/仿网易云做的 WebApp（五）/</id>
+    <published>2019-09-10T18:09:00.000Z</published>
+    <updated>2019-09-11T08:13:02.875Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：&lt;a href=&quot;https://sanyuan0704.github.io/react-cloud-music/）&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://sanyuan0704.github.io/react-cloud-music/）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;主要技术栈：react hooks + redux + immutable.js + rem&lt;/li&gt;
+&lt;li&gt;这一章主要讲 &lt;code&gt;Recommend&lt;/code&gt; 的  &lt;code&gt;scroll&lt;/code&gt; 组件的开发。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="CloudMusic WebApp" scheme="http://yoursite.com/tags/CloudMusic-WebApp/"/>
+    
+      <category term="rem" scheme="http://yoursite.com/tags/rem/"/>
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>仿网易云做的 WebApp（四）</title>
+    <link href="http://yoursite.com/2019/09/10/%E4%BB%BF%E7%BD%91%E6%98%93%E4%BA%91%E5%81%9A%E7%9A%84%20WebApp%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/10/仿网易云做的 WebApp（四）/</id>
+    <published>2019-09-09T18:21:00.000Z</published>
+    <updated>2019-09-10T01:59:18.744Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：&lt;a href=&quot;https://sanyuan0704.github.io/react-cloud-music/）&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://sanyuan0704.github.io/react-cloud-music/）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;主要技术栈：react hooks + redux + immutable.js + rem&lt;/li&gt;
+&lt;li&gt;这一章主要讲 &lt;code&gt;Recommend&lt;/code&gt; 组件的开发，涉及UI方面的轮播图、列表，&lt;code&gt;react&lt;/code&gt; 项目性能优化。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="CloudMusic WebApp" scheme="http://yoursite.com/tags/CloudMusic-WebApp/"/>
+    
+      <category term="rem" scheme="http://yoursite.com/tags/rem/"/>
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>仿网易云做的 WebApp（三）</title>
+    <link href="http://yoursite.com/2019/09/09/%E4%BB%BF%E7%BD%91%E6%98%93%E4%BA%91%E5%81%9A%E7%9A%84%20WebApp%EF%BC%88%E4%B8%89%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/09/仿网易云做的 WebApp（三）/</id>
+    <published>2019-09-08T17:39:03.000Z</published>
+    <updated>2019-09-11T08:12:04.527Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：&lt;a href=&quot;https://sanyuan0704.github.io/react-cloud-music/）&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://sanyuan0704.github.io/react-cloud-music/）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;主要技术栈：react hooks + redux + immutable.js + rem&lt;/li&gt;
+&lt;li&gt;这一章主要讲 &lt;code&gt;redux&lt;/code&gt; 的使用，初步搭建 &lt;code&gt;store&lt;/code&gt; 的结构。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="CloudMusic WebApp" scheme="http://yoursite.com/tags/CloudMusic-WebApp/"/>
+    
+      <category term="rem" scheme="http://yoursite.com/tags/rem/"/>
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用的 Git 命令.md</title>
+    <link href="http://yoursite.com/2019/09/09/%E5%B8%B8%E7%94%A8Git%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2019/09/09/常用Git命令/</id>
+    <published>2019-09-08T16:12:31.000Z</published>
+    <updated>2019-09-14T11:48:19.477Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里主要介绍的是 Git 的常用命令&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/categories/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用的 Hexo 命令.md</title>
+    <link href="http://yoursite.com/2019/09/09/%E5%B8%B8%E7%94%A8Hexo%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2019/09/09/常用Hexo命令/</id>
+    <published>2019-09-08T16:12:31.000Z</published>
+    <updated>2019-09-08T17:39:40.682Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里主要介绍的是 Hexo 的常用命令&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>仿网易云做的 WebApp（二）.md</title>
+    <link href="http://yoursite.com/2019/09/09/%E4%BB%BF%E7%BD%91%E6%98%93%E4%BA%91%E5%81%9A%E7%9A%84%20WebApp%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/09/仿网易云做的 WebApp（二）/</id>
+    <published>2019-09-08T16:12:31.000Z</published>
+    <updated>2019-09-08T17:12:07.021Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：&lt;a href=&quot;https://sanyuan0704.github.io/react-cloud-music/）&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://sanyuan0704.github.io/react-cloud-music/）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;主要技术栈：react hooks + redux + immutable.js + rem&lt;/li&gt;
+&lt;li&gt;这一章主要讲 &lt;code&gt;Home&lt;/code&gt; 组件的开发与 &lt;code&gt;rem&lt;/code&gt; 布局&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="CloudMusic WebApp" scheme="http://yoursite.com/tags/CloudMusic-WebApp/"/>
+    
+      <category term="rem" scheme="http://yoursite.com/tags/rem/"/>
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>找工作（备忘用）.md</title>
+    <link href="http://yoursite.com/2019/09/08/%E6%8B%9B%E8%81%98%E4%BF%A1%E6%81%AF/"/>
+    <id>http://yoursite.com/2019/09/08/招聘信息/</id>
+    <published>2019-09-08T09:18:44.000Z</published>
+    <updated>2019-10-04T09:44:01.808Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;找工作（备忘用）&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>前端开发工程师——徐小平.md</title>
+    <link href="http://yoursite.com/2019/09/08/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E5%BE%90%E5%B0%8F%E5%B9%B3/"/>
+    <id>http://yoursite.com/2019/09/08/前端开发——徐小平/</id>
+    <published>2019-09-08T09:18:44.000Z</published>
+    <updated>2019-09-09T18:29:51.959Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;个人简历：徐小平——前端开发工程师&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="简历" scheme="http://yoursite.com/categories/%E7%AE%80%E5%8E%86/"/>
+    
+    
+      <category term="个人简历" scheme="http://yoursite.com/tags/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>仿网易云做的 WebApp（一）.md</title>
+    <link href="http://yoursite.com/2019/09/08/%E4%BB%BF%E7%BD%91%E6%98%93%E4%BA%91%E5%81%9A%E7%9A%84%20WebApp%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/08/仿网易云做的 WebApp（一）/</id>
+    <published>2019-09-08T09:18:44.000Z</published>
+    <updated>2019-09-08T17:41:22.648Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：&lt;a href=&quot;https://sanyuan0704.github.io/react-cloud-music/）&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://sanyuan0704.github.io/react-cloud-music/）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;主要技术栈：react hooks + redux + immutable.js + rem&lt;/li&gt;
+&lt;li&gt;这一章主要讲全局样式与路由配置&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+      <category term="CloudMusic WebApp" scheme="http://yoursite.com/tags/CloudMusic-WebApp/"/>
+    
+      <category term="rem" scheme="http://yoursite.com/tags/rem/"/>
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+</feed>

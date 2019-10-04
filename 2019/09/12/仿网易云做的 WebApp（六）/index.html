@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="React,CloudMusic WebApp,rem,前端,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LemonSea" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：https://sanyuan0704.github.io/react-cloud-music/） 主要技术栈：react hooks + redux + immutable.js + rem 这一章主要讲 axios 与 redux 的数据层开发。">
+<meta name="keywords" content="React,CloudMusic WebApp,rem,前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="仿网易云做的 WebApp（六）">
+<meta property="og:url" content="http://yoursite.com/2019/09/12/仿网易云做的 WebApp（六）/index.html">
+<meta property="og:site_name" content="LemonSea">
+<meta property="og:description" content="跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：https://sanyuan0704.github.io/react-cloud-music/） 主要技术栈：react hooks + redux + immutable.js + rem 这一章主要讲 axios 与 redux 的数据层开发。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-13T17:29:16.267Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="仿网易云做的 WebApp（六）">
+<meta name="twitter:description" content="跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：https://sanyuan0704.github.io/react-cloud-music/） 主要技术栈：react hooks + redux + immutable.js + rem 这一章主要讲 axios 与 redux 的数据层开发。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '徐小平'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/12/仿网易云做的 WebApp（六）/">
+
+
+
+
+
+  <title>仿网易云做的 WebApp（六） | LemonSea</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LemonSea</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/12/仿网易云做的 WebApp（六）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐小平">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LemonSea">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">仿网易云做的 WebApp（六）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-12T02:09:00+08:00">
+                2019-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span id="busuanzi_value_page_pv"></span>次阅读
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>跟着三元大佬做的一款网易云音乐的 WebApp（三元大佬电子书链接：<a href="https://sanyuan0704.github.io/react-cloud-music/）" target="_blank" rel="noopener">https://sanyuan0704.github.io/react-cloud-music/）</a></li>
+<li>主要技术栈：react hooks + redux + immutable.js + rem</li>
+<li>这一章主要讲 <code>axios</code> 与 <code>redux</code> 的数据层开发。</li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h2 id="axios-封装请求"><a href="#axios-封装请求" class="headerlink" title="axios 封装请求"></a>axios 封装请求</h2><h3 id="安装-axios"><a href="#安装-axios" class="headerlink" title="安装 axios"></a>安装 axios</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install axios --save</span><br></pre></td></tr></table></figure>
+
+<p>因为这个项目用的是被人写的 <code>node.js</code> 项目提供 <code>api</code>，所以先去 <code>GitHub</code> 上面 <code>clone</code> 这个项目：<a href="https://github.com/Binaryify/NeteaseCloudMusicApi/tree/master" target="_blank" rel="noopener">GitHub网易云音乐接口</a>，然后把它运行在其他端口上，保证不和当前前端服务端口冲突。</p>
+<h3 id="配置-axios"><a href="#配置-axios" class="headerlink" title="配置 axios"></a>配置 axios</h3><p>关于 <code>api</code> 的调用我们写在 <code>api</code> 文件夹里，在这个文件夹下面创建 <code>config.js</code> 文件，里面编写 <code>axios</code> 的配置:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> baseUrl = <span class="string">'http://localhost:4000'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建axios的实例</span></span><br><span class="line"><span class="keyword">const</span> axiosInstance = axios.create(&#123;</span><br><span class="line">  baseURL: baseUrl</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 响应拦截器【响应拦截器的作用是在接收到响应后进行一些操作】</span></span><br><span class="line">axiosInstance.interceptors.response.use(</span><br><span class="line">  <span class="comment">// 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据</span></span><br><span class="line">  res =&gt; res.data,</span><br><span class="line">  <span class="comment">// 服务器状态码不是2开头的的情况</span></span><br><span class="line">  err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err, <span class="string">"网络错误"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  axiosInstance</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这个是 axios 的实例配置，它会在所有请求前方加上 <code>http://localhost:3300</code>，即让所有数据从这个端口号请求。</p>
+<p>本来还应该有下面的配置的：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">timeout: <span class="number">5000</span>， <span class="comment">// request timeout  设置请求超时时间</span></span><br><span class="line">responseType: <span class="string">"json"</span>,</span><br><span class="line">withCredentials: <span class="literal">true</span>, <span class="comment">// 是否允许带cookie这些</span></span><br><span class="line">headers: &#123;</span><br><span class="line">  <span class="string">"Content-Type"</span>: <span class="string">"application/json;charset=utf-8"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>响应拦截器很好理解，就是服务器返回给我们的数据，我们在拿到之前可以对他进行一些处理。例如：如果后台返回的状态码是2开头的，则正常返回数据。</p>
+<h3 id="封装不同的网络请求"><a href="#封装不同的网络请求" class="headerlink" title="封装不同的网络请求"></a>封装不同的网络请求</h3><p>在 <code>api</code> 文件夹下创建 <code>request.js</code> 文件，这个文件就封装不同的网络请求：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; axiosInstance &#125; <span class="keyword">from</span> <span class="string">"./config"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getBannerRequest = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> axiosInstance.get(<span class="string">'/banner'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getRecommendListRequest = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> axiosInstance.get(<span class="string">'/personalized'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里封装了需要的两个接口，到时候直接调这些函数即可。</p>
+<h2 id="reudx-开发"><a href="#reudx-开发" class="headerlink" title="reudx 开发"></a>reudx 开发</h2><p>在 <code>Recommend</code> 目录下，新建 <code>store</code> 文件夹，然后新建以下文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">actionCreators.js // 放不同action的地方</span><br><span class="line">constants.js      // 常量集合，存放不同action的type值</span><br><span class="line">index.js          // 用来导出reducer，action</span><br><span class="line">reducer.js        // 存放initialState和reducer函数</span><br></pre></td></tr></table></figure>
+
+<p>这是很自然的分离，如果用 <code>rudex</code> 的话，一般都会选择这样创建 <code>reudx</code> 结构。</p>
+<p>这里是创建的 <code>Recommend</code> 组件的 <code>store</code>，然后我们会把它整合到整体的 <code>store</code> 中，即 <code>src</code> 的 <code>store</code> 中。</p>
+<h3 id="初始化-reducer："><a href="#初始化-reducer：" class="headerlink" title="初始化 reducer："></a>初始化 reducer：</h3><p>在 <code>Recommend</code> 的 <code>store/reducer.js</code> 中写入如下代码，这就是一开始的 <code>reducer</code> 文件的内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取常量</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actionTypes <span class="keyword">from</span> <span class="string">'./constants'</span>;</span><br><span class="line"><span class="comment">// 导入 immutable 的 frmoJS 方法</span></span><br><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">'immutable'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里用到fromJS把JS数据结构转化成immutable数据结构</span></span><br><span class="line"><span class="keyword">const</span> defaultState = fromJS(&#123;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (state = defaultState, action) =&gt; &#123;</span><br><span class="line">    <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>理所当然，此时的 <code>constants.js</code> 和 <code>actionCreators.js</code> 中还没有任何的内容。</p>
+<h3 id="链接到主仓库"><a href="#链接到主仓库" class="headerlink" title="链接到主仓库"></a>链接到主仓库</h3><p>既然定义了 <code>reducer</code>，就需要把它链接到主仓库 <code>src/store/reducer.js</code> 中去，我们这里使用 <code>Recommend/store/index.js</code> 文件来做导出，在里面写入下面的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入仓库</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">'./reducer'</span></span><br><span class="line"><span class="comment">// 导入变量</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actionCreators <span class="keyword">from</span> <span class="string">'./actionCreators'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出变量</span></span><br><span class="line"><span class="keyword">export</span> &#123; reducer, actionCreators &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后去  <code>src/reducer.js</code> 中导入 <code>Recommend/store/reducer/js</code> 并合并：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 合并 reducer 函数</span></span><br><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux-immutable'</span>;</span><br><span class="line"><span class="comment">// 导入分仓库的 reducer</span></span><br><span class="line"><span class="keyword">import</span> &#123; reducer <span class="keyword">as</span> recommendReducer &#125; <span class="keyword">from</span> <span class="string">'../application/Recommend/store/index'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并 reducer 函数为一个 obj</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> combineReducers(&#123;</span><br><span class="line">    recommend: recommendReducer,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-connect"><a href="#使用-connect" class="headerlink" title="使用 connect"></a>使用 connect</h3><p>去 <code>Recommend/index.js</code> 中导入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 负责将 ui 组件包装成容器组件</span></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">"react-redux"</span>;</span><br><span class="line"><span class="comment">// 导入常量</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actionCreaters <span class="keyword">from</span> <span class="string">'./store/actionCreators'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>connect 的使用方法是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 映射Redux全局的state到组件的props上</span></span><br><span class="line"><span class="keyword">const</span> mapStateToProps = <span class="function">(<span class="params">state</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 映射dispatch到props上</span></span><br><span class="line"><span class="keyword">const</span> mapDispatchToProps = <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将ui组件包装成容器组件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(mapStateToProps, mapDispatchToProps)(React.memo(Recommend))</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-reducer"><a href="#修改-reducer" class="headerlink" title="修改 reducer"></a>修改 reducer</h3><p>首先是在 <code>Recommend/store/reducer.js</code> 中创建 <code>bannerList</code> 和 <code>recommendList</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取常量</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actionTypes <span class="keyword">from</span> <span class="string">'./constants'</span>;</span><br><span class="line"><span class="comment">// 导入 immutable 的 frmoJS 方法</span></span><br><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">'immutable'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里用到fromJS把JS数据结构转化成immutable数据结构</span></span><br><span class="line"><span class="keyword">const</span> defaultState = fromJS(&#123;</span><br><span class="line">    bannerList: [],</span><br><span class="line">    recommendList: [],</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (state = defaultState, action) =&gt; &#123;</span><br><span class="line">    <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>constants</code> 中定义常量：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//constants.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> CHANGE_BANNER = <span class="string">'recommend/CHANGE_BANNER'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> CHANGE_RECOMMEND_LIST = <span class="string">'recommend/RECOMMEND_LIST'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>再重新定义 <code>reducer</code> 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (state = defaultState, action) =&gt; &#123;</span><br><span class="line">  <span class="keyword">switch</span>(action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> actionTypes.CHANGE_BANNER:</span><br><span class="line">      <span class="keyword">return</span> state.set(<span class="string">'bannerList'</span>, action.data);</span><br><span class="line">    <span class="keyword">case</span> actionTypes.CHANGE_RECOMMEND_LIST:</span><br><span class="line">      <span class="keyword">return</span> state.set(<span class="string">'recommendList'</span>, action.data);</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="index-中获取-redux-的数据"><a href="#index-中获取-redux-的数据" class="headerlink" title="index 中获取 redux 的数据"></a>index 中获取 redux 的数据</h3><p>去 <code>Recommend/index.js</code> 中修改，我们先把之前的 <code>mock</code> 的数据删除了，换上重 <code>redux</code> 中获取的数据：</p>
+<p>这里就需要使用我们之前的 <code>mapStateToProps</code> 方法了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 映射Redux全局的state到组件的props上</span></span><br><span class="line"><span class="keyword">const</span> mapStateToProps = <span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">    <span class="comment">// 不要再这里将数据toJS,不然每次diff比对props的时候都是不一样的引用，还是导致不必要的重渲染, 属于滥用immutable</span></span><br><span class="line">    bannerList: state.getIn([<span class="string">'recommend'</span>, <span class="string">'bannerList'</span>]),</span><br><span class="line">    recommendList: state.getIn([<span class="string">'recommend'</span>,<span class="string">'recommendList'</span>]),</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>getIn</code> 是用来指定获取哪一个子 <code>reducer</code> 里的哪一个数据的，因为我们获取数据还是要通过全局的 <code>src/reducer.js</code> 来获取，所以我们要用这种方法指定数据的位置。<code>getIn</code> 的参数是一个数组，数组的第一个元素是在 <code>src/recuder.js</code> 中我们给 <code>Recommend/store/reducer.js</code> 命的名，第二个参数是 <code>Recommend/store/reducer.js</code> 中对应数据的名称。</p>
+<p>把之前的 <code>mock</code> 数据改为下面的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对象结构</span></span><br><span class="line"><span class="keyword">const</span> &#123; bannerList, recommendList &#125; = props;</span><br><span class="line"><span class="comment">// 把 immutable 数据类型转换为对应的 js 数据类型</span></span><br><span class="line"><span class="keyword">const</span> bannerListJS = bannerList ? bannerList.toJS() : [];</span><br><span class="line"><span class="keyword">const</span> recommendListJS = recommendList ? recommendList.toJS() :[];<span class="string">``</span></span><br></pre></td></tr></table></figure>
+
+<p>这里我们要转一下获取到的数据的数据类型，因为我们 <code>redux</code> 中是 <code>immutable</code> 数据，而我们能使用的是 <code>js</code> 数据。</p>
+<p>理所当然，我们的传递给子组件的数据也要修改一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> (</span><br><span class="line">        &lt;Content&gt;</span><br><span class="line">            &lt;Scroll className=<span class="string">"list"</span>&gt;</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    &lt;Slider bannerList=&#123;bannerListJS&#125;&gt;&lt;/Slider&gt;</span><br><span class="line">                    &lt;List recommendList=&#123;recommendListJS&#125;&gt;&lt;/List&gt;</span><br><span class="line">                &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Scroll&gt;</span><br><span class="line">        &lt;<span class="regexp">/Content&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br></pre></td></tr></table></figure>
+
+<p>此时如果 <code>redux</code> 中有数据，我们就已经获取到了，可是现在 <code>redux</code> 中还没有数据，所以接下来我们用 <code>axios</code> 来获取数据。</p>
+<h3 id="定义-axios-获取数据的函数"><a href="#定义-axios-获取数据的函数" class="headerlink" title="定义 axios 获取数据的函数"></a>定义 axios 获取数据的函数</h3><p>去 <code>actionCreators.js</code> 中写下如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入常量</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actionTypes <span class="keyword">from</span> <span class="string">'./constants'</span>;</span><br><span class="line"><span class="comment">// 将JS对象转换成immutable对象</span></span><br><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">'immutable'</span>;</span><br><span class="line"><span class="comment">// 导入网络请求</span></span><br><span class="line"><span class="keyword">import</span> &#123; getBannerRequest, getRecommendListRequest &#125; <span class="keyword">from</span> <span class="string">'../../../api/request'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>axios</code> 获取轮播图的数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取轮播图数据</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getBannerList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">        getBannerRequest().then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">            dispatch(changeBannerList(data.banners));</span><br><span class="line">        &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"轮播图数据传输错误"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这里使用了之前定义的网络请求 <code>getBannerRequest</code>，所以它完整的请求路径其实是：<code>http://localhost:4000/banner</code>。</p>
+<p>然后定义 <code>changeBannerList</code>，它是用来获取到数据后定义要传送给 <code>redux</code> 的数据的格式的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> changeBannerList = <span class="function">(<span class="params">data</span>) =&gt;</span> (&#123;</span><br><span class="line">    type: actionTypes.CHANGE_BANNER,</span><br><span class="line">    data: fromJS(data)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>传给 <code>redux</code> 的数据格式是 <code>type</code> 和 <code>data</code>，<code>type</code> 是我们定义的常量，而 <code>data</code> 因为我们获取的是 <code>js</code> 数据的原因，这里要先转成 <code>immutable</code> 数据格式才能给 <code>redux</code> 使用。</p>
+<p>用同样的写法获取推荐列表的数据，下面是整个 <code>actionCreators</code> 的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入常量</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actionTypes <span class="keyword">from</span> <span class="string">'./constants'</span>;</span><br><span class="line"><span class="comment">// 将JS对象转换成immutable对象</span></span><br><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">'immutable'</span>;</span><br><span class="line"><span class="comment">// 导入网络请求</span></span><br><span class="line"><span class="keyword">import</span> &#123; getBannerRequest, getRecommendListRequest &#125; <span class="keyword">from</span> <span class="string">'../../../api/request'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> changeBannerList = <span class="function">(<span class="params">data</span>) =&gt;</span> (&#123;</span><br><span class="line">    type: actionTypes.CHANGE_BANNER,</span><br><span class="line">    data: fromJS(data)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> changeRecommendList = <span class="function">(<span class="params">data</span>) =&gt;</span> (&#123;</span><br><span class="line">    type: actionTypes.CHANGE_RECOMMEND_LIST,</span><br><span class="line">    data: fromJS(data)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取轮播图数据</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getBannerList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">        getBannerRequest().then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">            dispatch(changeBannerList(data.banners));</span><br><span class="line">        &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"轮播图数据传输错误"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getRecommendList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">        getRecommendListRequest().then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">            dispatch(changeRecommendList(data.result));</span><br><span class="line">        &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"推荐歌单数据传输错误"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在-Recommend-中使用获取数据的函数"><a href="#在-Recommend-中使用获取数据的函数" class="headerlink" title="在 Recommend 中使用获取数据的函数"></a>在 Recommend 中使用获取数据的函数</h3><p>首先拿到我们获取数据的方法，这里就用到了 <code>mapDispatchToProps</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 映射dispatch到props上</span></span><br><span class="line"><span class="keyword">const</span> mapDispatchToProps = <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        getBannerDataDispatch() &#123;</span><br><span class="line">            dispatch(actionCreaters.getBannerList());</span><br><span class="line">        &#125;,</span><br><span class="line">        getRecommendListDataDispatch() &#123;</span><br><span class="line">            dispatch(actionCreaters.getRecommendList());</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后使用它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对象解构</span></span><br><span class="line"><span class="keyword">const</span> &#123; getBannerDataDispatch, getRecommendListDataDispatch &#125; = props;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当传空数组([])时，只会在组件 mount 时执行内部方法。</span></span><br><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    getBannerDataDispatch();</span><br><span class="line">    getRecommendListDataDispatch();</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+
+<p>以上，有了获取数据的方法，有了使用数据的方法，只要启动<a href="https://github.com/Binaryify/NeteaseCloudMusicApi/tree/master" target="_blank" rel="noopener">GitHub网易云音乐接口</a>，然后把它运行在其他端口上，并在 <code>api/config.js</code> 中的 <code>baseUrl</code> 配置成你运行的端口号，那么我们的页面数据应该已经可以正常使用了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="Recommend-index-js"><a href="#Recommend-index-js" class="headerlink" title="Recommend/index.js"></a>Recommend/index.js</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> Slider <span class="keyword">from</span> <span class="string">'../../components/slider'</span>;</span><br><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">'../../components/list'</span>;</span><br><span class="line"><span class="keyword">import</span> Scroll <span class="keyword">from</span> <span class="string">'../../baseUI/scroll'</span>;</span><br><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'styled-components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">"react-redux"</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actionCreaters <span class="keyword">from</span> <span class="string">'./store/actionCreators'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> Content = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  position: fixed;</span></span><br><span class="line"><span class="string">  top: 2.4rem;</span></span><br><span class="line"><span class="string">  bottom: 0;</span></span><br><span class="line"><span class="string">  width: 100%;</span></span><br><span class="line"><span class="string">  max-width: 750px;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Recommend</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// const bannerList = [1, 2, 3, 4].map(item =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     return &#123; imageUrl: "http://p1.music.126.net/ZYLJ2oZn74yUz5x8NBGkVA==/109951164331219056.jpg" &#125;</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line">    <span class="comment">// const recommendList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     return &#123;</span></span><br><span class="line">    <span class="comment">//         id: index,</span></span><br><span class="line">    <span class="comment">//         picUrl: "https://p1.music.126.net/fhmefjUfMD-8qtj3JKeHbA==/18999560928537533.jpg",</span></span><br><span class="line">    <span class="comment">//         playCount: 17171122,</span></span><br><span class="line">    <span class="comment">//         name: "[洗澡时听的歌] 浴室里听歌吹泡泡o○o○o○"</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">// &#125;);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> &#123; bannerList, recommendList &#125; = props;</span><br><span class="line">    <span class="keyword">const</span> bannerListJS = bannerList ? bannerList.toJS() : [];</span><br><span class="line">    <span class="keyword">const</span> recommendListJS = recommendList ? recommendList.toJS() : [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> &#123; getBannerDataDispatch, getRecommendListDataDispatch &#125; = props;</span><br><span class="line"></span><br><span class="line">    useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        getBannerDataDispatch();</span><br><span class="line">        getRecommendListDataDispatch();</span><br><span class="line">    &#125;, []);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;Content&gt;</span><br><span class="line">            &lt;Scroll className=<span class="string">"list"</span>&gt;</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    &lt;Slider bannerList=&#123;bannerListJS&#125;&gt;&lt;/Slider&gt;</span><br><span class="line">                    &lt;List recommendList=&#123;recommendListJS&#125;&gt;&lt;/List&gt;</span><br><span class="line">                &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Scroll&gt;</span><br><span class="line">        &lt;<span class="regexp">/Content&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 映射Redux全局的state到组件的props上</span></span><br><span class="line"><span class="regexp">const mapStateToProps = (state) =&gt; (&#123;</span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/ 不要再这里将数据toJS,不然每次diff比对props的时候都是不一样的引用，还是导致不必要的重渲染, 属于滥用immutable</span></span><br><span class="line"><span class="regexp">    bannerList: state.getIn(['recommend', 'bannerList']),</span></span><br><span class="line"><span class="regexp">    recommendList: state.getIn(['recommend', 'recommendList']),</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 映射dispatch到props上</span></span><br><span class="line"><span class="regexp">const mapDispatchToProps = (dispatch) =&gt; &#123;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">        getBannerDataDispatch() &#123;</span></span><br><span class="line"><span class="regexp">            dispatch(actionCreaters.getBannerList());</span></span><br><span class="line"><span class="regexp">        &#125;,</span></span><br><span class="line"><span class="regexp">        getRecommendListDataDispatch() &#123;</span></span><br><span class="line"><span class="regexp">            dispatch(actionCreaters.getRecommendList());</span></span><br><span class="line"><span class="regexp">        &#125;,</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 将ui组件包装成容器组件</span></span><br><span class="line"><span class="regexp">export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Recommend))</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Recommend-store-reducer-js"><a href="#Recommend-store-reducer-js" class="headerlink" title="Recommend/store/reducer.js"></a>Recommend/store/reducer.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取常量</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actionTypes <span class="keyword">from</span> <span class="string">'./constants'</span>;</span><br><span class="line"><span class="comment">// 导入 immutable 的 frmoJS 方法</span></span><br><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">'immutable'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里用到fromJS把JS数据结构转化成immutable数据结构</span></span><br><span class="line"><span class="keyword">const</span> defaultState = fromJS(&#123;</span><br><span class="line">    bannerList: [],</span><br><span class="line">    recommendList: [],</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (state = defaultState, action) =&gt; &#123;</span><br><span class="line">    <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">        <span class="keyword">case</span> actionTypes.CHANGE_BANNER:</span><br><span class="line">            <span class="keyword">return</span> state.set(<span class="string">'bannerList'</span>, action.data);</span><br><span class="line">        <span class="keyword">case</span> actionTypes.CHANGE_RECOMMEND_LIST:</span><br><span class="line">            <span class="keyword">return</span> state.set(<span class="string">'recommendList'</span>, action.data);</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Recommend-store-actionCreators-js"><a href="#Recommend-store-actionCreators-js" class="headerlink" title="Recommend/store/actionCreators.js"></a>Recommend/store/actionCreators.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入常量</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actionTypes <span class="keyword">from</span> <span class="string">'./constants'</span>;</span><br><span class="line"><span class="comment">// 将JS对象转换成immutable对象</span></span><br><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">'immutable'</span>;</span><br><span class="line"><span class="comment">// 导入网络请求</span></span><br><span class="line"><span class="keyword">import</span> &#123; getBannerRequest, getRecommendListRequest &#125; <span class="keyword">from</span> <span class="string">'../../../api/request'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> changeBannerList = <span class="function">(<span class="params">data</span>) =&gt;</span> (&#123;</span><br><span class="line">    type: actionTypes.CHANGE_BANNER,</span><br><span class="line">    data: fromJS(data)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> changeRecommendList = <span class="function">(<span class="params">data</span>) =&gt;</span> (&#123;</span><br><span class="line">    type: actionTypes.CHANGE_RECOMMEND_LIST,</span><br><span class="line">    data: fromJS(data)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取轮播图数据</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getBannerList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">        getBannerRequest().then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">            dispatch(changeBannerList(data.banners));</span><br><span class="line">        &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"轮播图数据传输错误"</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getRecommendList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">        getRecommendListRequest().then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">            dispatch(changeRecommendList(data.result));</span><br><span class="line">        &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"推荐歌单数据传输错误"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Recommend-store-constants-js"><a href="#Recommend-store-constants-js" class="headerlink" title="Recommend/store/constants.js"></a>Recommend/store/constants.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//constants.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> CHANGE_BANNER = <span class="string">'recommend/CHANGE_BANNER'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> CHANGE_RECOMMEND_LIST = <span class="string">'recommend/RECOMMEND_LIST'</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="src-store-reducer-js"><a href="#src-store-reducer-js" class="headerlink" title="src/store/reducer.js"></a>src/store/reducer.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 合并 reducer 函数</span></span><br><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux-immutable'</span>;</span><br><span class="line"><span class="comment">// 导入分仓库的 reducer</span></span><br><span class="line"><span class="keyword">import</span> &#123; reducer <span class="keyword">as</span> recommendReducer &#125; <span class="keyword">from</span> <span class="string">'../application/Recommend/store/index'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并 reducer 函数为一个 obj</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> combineReducers(&#123;</span><br><span class="line">    recommend: recommendReducer,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/CloudMusic-WebApp/" rel="tag"># CloudMusic WebApp</a>
+          
+            <a href="/tags/rem/" rel="tag"># rem</a>
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/11/仿网易云做的 WebApp（五）/" rel="next" title="仿网易云做的 WebApp（五）">
+                <i class="fa fa-chevron-left"></i> 仿网易云做的 WebApp（五）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/13/仿网易云做的 WebApp（七）/" rel="prev" title="仿网易云做的 WebApp（七）">
+                仿网易云做的 WebApp（七） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="your uid"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="徐小平">
+            
+              <p class="site-author-name" itemprop="name">徐小平</p>
+              <p class="site-description motion-element" itemprop="description">路漫漫其修远兮，吾将上下而求索</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LemonSea" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#axios-封装请求"><span class="nav-number">1.</span> <span class="nav-text">axios 封装请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-axios"><span class="nav-number">1.1.</span> <span class="nav-text">安装 axios</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-axios"><span class="nav-number">1.2.</span> <span class="nav-text">配置 axios</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装不同的网络请求"><span class="nav-number">1.3.</span> <span class="nav-text">封装不同的网络请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reudx-开发"><span class="nav-number">2.</span> <span class="nav-text">reudx 开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化-reducer："><span class="nav-number">2.1.</span> <span class="nav-text">初始化 reducer：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接到主仓库"><span class="nav-number">2.2.</span> <span class="nav-text">链接到主仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-connect"><span class="nav-number">2.3.</span> <span class="nav-text">使用 connect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-reducer"><span class="nav-number">2.4.</span> <span class="nav-text">修改 reducer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#index-中获取-redux-的数据"><span class="nav-number">2.5.</span> <span class="nav-text">index 中获取 redux 的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义-axios-获取数据的函数"><span class="nav-number">2.6.</span> <span class="nav-text">定义 axios 获取数据的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-Recommend-中使用获取数据的函数"><span class="nav-number">2.7.</span> <span class="nav-text">在 Recommend 中使用获取数据的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommend-index-js"><span class="nav-number">3.1.</span> <span class="nav-text">Recommend/index.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommend-store-reducer-js"><span class="nav-number">3.2.</span> <span class="nav-text">Recommend/store/reducer.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommend-store-actionCreators-js"><span class="nav-number">3.3.</span> <span class="nav-text">Recommend/store/actionCreators.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommend-store-constants-js"><span class="nav-number">3.4.</span> <span class="nav-text">Recommend/store/constants.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#src-store-reducer-js"><span class="nav-number">3.5.</span> <span class="nav-text">src/store/reducer.js</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐小平</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
