@@ -199,6 +199,32 @@
   </entry>
   
   <entry>
+    <title>文章管理系统——后端（一）</title>
+    <link href="http://yoursite.com/2019/09/17/%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/09/17/文章管理系统——后端（一）/</id>
+    <published>2019-09-17T09:18:44.000Z</published>
+    <updated>2019-10-04T14:46:59.261Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;主要技术栈：.net Core&lt;/li&gt;
+&lt;li&gt;这一章主要讲 &lt;code&gt;.net Core&lt;/code&gt; 的结构。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term=".net" scheme="http://yoursite.com/categories/net/"/>
+    
+    
+      <category term="后台管理系统" scheme="http://yoursite.com/tags/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term=".net Core" scheme="http://yoursite.com/tags/net-Core/"/>
+    
+  </entry>
+  
+  <entry>
     <title>文章管理系统——前端（二）</title>
     <link href="http://yoursite.com/2019/09/17/%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E5%89%8D%E7%AB%AF%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <id>http://yoursite.com/2019/09/17/文章管理系统——前端（二）/</id>
@@ -224,32 +250,6 @@
       <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="后台管理系统" scheme="http://yoursite.com/tags/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文章管理系统——后端（一）</title>
-    <link href="http://yoursite.com/2019/09/17/%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>http://yoursite.com/2019/09/17/文章管理系统——后端（一）/</id>
-    <published>2019-09-17T09:18:44.000Z</published>
-    <updated>2019-10-04T14:46:59.261Z</updated>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;主要技术栈：.net Core&lt;/li&gt;
-&lt;li&gt;这一章主要讲 &lt;code&gt;.net Core&lt;/code&gt; 的结构。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term=".net" scheme="http://yoursite.com/categories/net/"/>
-    
-    
-      <category term="后台管理系统" scheme="http://yoursite.com/tags/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
-    
-      <category term=".net Core" scheme="http://yoursite.com/tags/net-Core/"/>
     
   </entry>
   
@@ -444,7 +444,7 @@
     <link href="http://yoursite.com/2019/09/09/%E5%B8%B8%E7%94%A8Git%E5%91%BD%E4%BB%A4/"/>
     <id>http://yoursite.com/2019/09/09/常用Git命令/</id>
     <published>2019-09-08T16:12:31.000Z</published>
-    <updated>2019-09-14T11:48:19.477Z</updated>
+    <updated>2019-10-05T13:46:02.553Z</updated>
     
     <summary type="html">
     
@@ -515,15 +515,15 @@
   </entry>
   
   <entry>
-    <title>找工作（备忘用）.md</title>
-    <link href="http://yoursite.com/2019/09/08/%E6%8B%9B%E8%81%98%E4%BF%A1%E6%81%AF/"/>
-    <id>http://yoursite.com/2019/09/08/招聘信息/</id>
+    <title>学习清单（备忘用）.md</title>
+    <link href="http://yoursite.com/2019/09/08/%E5%AD%A6%E4%B9%A0%E6%B8%85%E5%8D%95/"/>
+    <id>http://yoursite.com/2019/09/08/学习清单/</id>
     <published>2019-09-08T09:18:44.000Z</published>
-    <updated>2019-10-04T09:44:01.808Z</updated>
+    <updated>2019-10-04T15:09:03.819Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;找工作（备忘用）&lt;/p&gt;
+      &lt;p&gt;学习清单（备忘用）&lt;/p&gt;
     
     </summary>
     
